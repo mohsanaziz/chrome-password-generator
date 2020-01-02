@@ -29,9 +29,9 @@
 
   <div class="password">
     <mat-form-field>
-      <input matInput readonly [formControl]="password" />
+      <input #passwordInput matInput readonly [formControl]="password" />
     </mat-form-field>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="copy()">
       <mat-icon>file_copy</mat-icon>
     </button>
   </div>
