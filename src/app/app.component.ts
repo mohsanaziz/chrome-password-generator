@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'maz-root',
@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   passwordGeneratorForm: FormGroup;
+  password: FormControl = new FormControl('');
 
   private readonly SYMBOLS: string[] = ['@', '#', '$', '%', '[', ']', '(', ')', '~', '*', '-', '_', ';'];
   private readonly NUMBER: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -86,6 +87,8 @@ export class AppComponent implements OnInit {
     for (let index = 0; index < this.passwordGeneratorForm.get('length').value; index++) {
       password += referenceString.charAt(Math.floor(Math.random() * referenceString.length));
     }
+
+    this.password.setValue(password);
   }
 
   /**
@@ -94,5 +97,6 @@ export class AppComponent implements OnInit {
   clear() {
     this.passwordGeneratorForm.reset();
     this.initForm();
+    this.password.reset();
   }
 }
