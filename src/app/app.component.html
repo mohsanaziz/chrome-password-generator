@@ -20,7 +20,7 @@
   <label>Include uppercase characters :</label>
   <mat-checkbox formControlName="upperCase" color="primary"> ( e.g. {{ 'abcdefghijklmnopqrstuvwxyz' | uppercase }} ) </mat-checkbox>
 
-  <button mat-raised-button>Clear</button>
+  <button mat-raised-button (click)="clear()">Clear</button>
   <button mat-raised-button color="primary" (click)="generatePassword()">
     Generate password
   </button>

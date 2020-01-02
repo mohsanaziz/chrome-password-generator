@@ -44,6 +44,13 @@ export class AppComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  /**
+   * Initialize the form.
+   */
+  initForm() {
     this.passwordGeneratorForm = this.formBuilder.group({
       length: [2048],
       symbols: [true],
@@ -53,12 +60,39 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /**
+   * Generate the password.
+   */
   generatePassword() {
     let password = '';
-    const superString = this.SYMBOLS.join('') + this.NUMBER.join('') + this.LOWERCASE.join('') + this.UPPERCASE.join('');
+    let referenceString = '';
+
+    if (this.passwordGeneratorForm.get('symbols').value) {
+      referenceString += this.SYMBOLS.join('');
+    }
+
+    if (this.passwordGeneratorForm.get('number').value) {
+      referenceString += this.NUMBER.join('');
+    }
+
+    if (this.passwordGeneratorForm.get('lowerCase').value) {
+      referenceString += this.LOWERCASE.join('');
+    }
+
+    if (this.passwordGeneratorForm.get('upperCase').value) {
+      referenceString += this.UPPERCASE.join('');
+    }
 
     for (let index = 0; index < this.passwordGeneratorForm.get('length').value; index++) {
-      password += superString.charAt(Math.floor(Math.random() * superString.length));
+      password += referenceString.charAt(Math.floor(Math.random() * referenceString.length));
     }
+  }
+
+  /**
+   * Clear the form.
+   */
+  clear() {
+    this.passwordGeneratorForm.reset();
+    this.initForm();
   }
 }
