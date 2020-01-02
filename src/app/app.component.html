@@ -1,0 +1,39 @@
+<form [formGroup]="passwordGeneratorForm">
+  <label>Password length :</label>
+  <mat-slider
+    color="primary"
+    [max]="2048"
+    [min]="6"
+    [thumbLabel]="true"
+    formControlName="length"
+  >
+  </mat-slider>
+
+  <label>Include symbols :</label>
+  <mat-checkbox formControlName="symbols" color="primary">
+    ( e.g. @ # $ % [ ] ( ) / \ ' " ` ~ , ; : . &lt; &gt; )
+  </mat-checkbox>
+
+  <label>Include numbers :</label>
+  <mat-checkbox formControlName="number" color="primary">
+    ( e.g. 123456789 )
+  </mat-checkbox>
+
+  <label>Include lowercase characters :</label>
+  <mat-checkbox formControlName="lowerCase" color="primary">
+    ( e.g. abcdefghijklmnopqrstuvwxyz )
+  </mat-checkbox>
+
+  <label>Include uppercase characters :</label>
+  <mat-checkbox formControlName="upperCase" color="primary">
+    ( e.g. {{ 'abcdefghijklmnopqrstuvwxyz' | uppercase }} )
+  </mat-checkbox>
+
+  <label>Exclude similar characters :</label>
+  <mat-checkbox formControlName="similar" color="primary">
+    ( e.g. i, l, 1, L, o, 0, O )
+  </mat-checkbox>
+
+  <button mat-raised-button>Clear</button>
+  <button mat-raised-button color="primary">Generate password</button>
+</form>
