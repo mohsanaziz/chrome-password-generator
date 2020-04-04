@@ -1,28 +1,30 @@
 <div class="container">
   <form [formGroup]="passwordGeneratorForm">
     <label>Password length :</label>
-    <mat-slider color="primary" [max]="2048" [min]="6" [thumbLabel]="true" formControlName="length"> </mat-slider>
+    <mat-form-field>
+      <input type="number" matInput [max]="2048" [min]="8" formControlName="length" />
+    </mat-form-field>
 
     <label>Include symbols :</label>
     <mat-checkbox formControlName="symbols" color="primary">
-      ( e.g. @ # $ % [ ] ( ) ~ * - _ ; )
+      {{ '( e.g. ' + SYMBOLS.join(' ') + ' )' }}
     </mat-checkbox>
 
     <label>Include numbers :</label>
     <mat-checkbox formControlName="number" color="primary">
-      ( e.g. 0123456789 )
+      {{ '( e.g. ' + NUMBER.join('') + ' )' }}
     </mat-checkbox>
 
     <label>Include lowercase characters :</label>
     <mat-checkbox formControlName="lowerCase" color="primary">
-      ( e.g. abcdefghijklmnopqrstuvwxyz )
+      {{ '( e.g. ' + LOWERCASE.join('') + ' )' }}
     </mat-checkbox>
 
     <label>Include uppercase characters :</label>
-    <mat-checkbox formControlName="upperCase" color="primary"> ( e.g. {{ 'abcdefghijklmnopqrstuvwxyz' | uppercase }} ) </mat-checkbox>
+    <mat-checkbox formControlName="upperCase" color="primary"> {{ '( e.g. ' + (LOWERCASE.join('') | uppercase) + ' )' }}</mat-checkbox>
 
     <button mat-raised-button (click)="clear()">Clear</button>
-    <button mat-raised-button color="primary" (click)="generatePassword()">
+    <button mat-raised-button color="primary" (click)="generatePassword()" [disabled]="!passwordGeneratorForm.valid">
       Generate password
     </button>
   </form>

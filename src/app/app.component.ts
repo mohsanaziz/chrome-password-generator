@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'maz-root',
@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
 
   @ViewChild('passwordInput') passwordInput: ElementRef;
 
-  private readonly SYMBOLS: string[] = ['@', '#', '$', '%', '[', ']', '(', ')', '~', '*', '-', '_', ';'];
-  private readonly NUMBER: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  private readonly LOWERCASE: string[] = [
+  readonly SYMBOLS: string[] = ['@', '#', '$', '%', '[', ']', '(', ')', '~', '*', '-', '_', ';'];
+  readonly NUMBER: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  readonly LOWERCASE: string[] = [
     'a',
     'b',
     'c',
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
    */
   initForm() {
     this.passwordGeneratorForm = this.formBuilder.group({
-      length: [2048],
+      length: [128, [Validators.min(8), Validators.max(2048)]],
       symbols: [true],
       number: [true],
       lowerCase: [true],
