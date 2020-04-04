@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   passwordGeneratorForm: FormGroup;
   password: FormControl = new FormControl('');
 
-  @ViewChild('passwordInput', { static: false }) passwordInput: ElementRef;
+  @ViewChild('passwordInput') passwordInput: ElementRef;
 
   private readonly SYMBOLS: string[] = ['@', '#', '$', '%', '[', ']', '(', ')', '~', '*', '-', '_', ';'];
   private readonly NUMBER: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
